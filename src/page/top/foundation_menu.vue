@@ -12,7 +12,7 @@
       </template>
       <MenuGroup title="管理">
         <MenuItem name="3-1">基金会资料</MenuItem>
-        <MenuItem name="3-2">基金会认证</MenuItem>
+        <MenuItem name="3-2" to="/foundation/foundation_prove">基金会认证</MenuItem>
       </MenuGroup>
     </Submenu>
     <MenuItem name="4" to="/foundation/foundation_qa">

@@ -109,6 +109,8 @@ export default {
               this.$addStorageEvent(1, "uuid", JSON.stringify(user.uuid));
               this.$addStorageEvent(1, "id", JSON.stringify(user.id));
               this.$addStorageEvent(1, "name", JSON.stringify(user.name));
+              this.$addStorageEvent(1, "username", JSON.stringify(user.username));
+              this.$addStorageEvent(1, "foundation_id", JSON.stringify(user.foundation_id));
               this.$addStorageEvent(1, "tel", JSON.stringify(user.tel));
               console.log(sessionStorage.getItem("uuid"));
               if (user.role == "0") {

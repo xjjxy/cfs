@@ -14,7 +14,7 @@ Vue.use(ipfs);
 Vue.use(axios)
 Vue.use(VueRouter);
 Vue.use(ViewUI);
-
+Vue.prototype.$axios=axios;
 Vue.prototype.$api = Api;
 Vue.config.productionTip = false
 const router = new VueRouter({

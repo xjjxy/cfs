@@ -2,7 +2,9 @@
   <Header :style="{position: 'flex', width: '100%'}">
     <Menu mode="horizontal" theme="dark">
       <div class="layout-logo">
-        <Button :ghost="ghost" size="large" type="text">CCS慈善募捐</Button>
+        <MenuItem name="9" @click.native="tohome">
+          <Icon type="ios-home" />CFS慈善募捐系统
+        </MenuItem>
       </div>
       <!-- 中间导航菜单 -->
       <user_menu v-if="user_memu_actice"></user_menu>
@@ -28,13 +30,12 @@
           <MenuGroup title="管理">
             <MenuItem name="5-1" v-if="user_memu_actice">用户资料</MenuItem>
             <MenuItem name="5-2" v-if="user_memu_actice" to="/walletInfo">用户钱包</MenuItem>
-            <MenuItem name="5-1" v-if="foundation_memu_actice">用户资料</MenuItem>
+            <MenuItem name="5-1" v-if="foundation_memu_actice" to="/foundation/foundation_info">基金会资料</MenuItem>
             <MenuItem name="5-2" v-if="foundation_memu_actice" to="/walletInfo">基金会钱包</MenuItem>
           </MenuGroup>
         </Submenu>
         <MenuItem name="6" @click.native="logout">
-          <Icon type="md-log-out" />
-          登出
+          <Icon type="md-log-out" />登出
         </MenuItem>
       </div>
     </Menu>
@@ -111,7 +112,16 @@ export default {
       // this.$removeStorageEvent(1, "role");
       //修改为清空
       this.$clearStorageEvent(1);
-      this.$router.replace("user_home");
+      // this.$router.replace("user_home");
+    },
+    tohome() {
+      if (JSON.parse(sessionStorage.getItem("role")) == "0") {
+        this.$router.push("user_home");
+      } else if (JSON.parse(sessionStorage.getItem("role")) == "1") {
+        this.$router.push("foundation_home");
+      } else {
+        this.$router.push("admin_home");
+      }
     }
   }
 };
@@ -133,7 +143,7 @@ export default {
 }
 
 .layout-logo {
-  width: 130px;
+  width: 230px;
   border-radius: 3px;
   float: left;
   position: relative;

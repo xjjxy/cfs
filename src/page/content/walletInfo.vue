@@ -56,7 +56,7 @@ export default {
         if (response.status >= 200 && response.status < 300) {
           var data = response.data;
           if (data.type == "0") {
-            this.$Message.success("Fail!");
+            this.$Message.error("Load Fail!");
           } else {
             console.log("wallet" + data.wallet.balance);
             var wallet = data.wallet;
@@ -69,7 +69,7 @@ export default {
             this.$addStorageEvent(1, "hash", JSON.stringify(wallet.hash));
           }
         } else {
-          this.$Message.success("Fail!");
+          this.$Message.error("Connect Fail!");
         }
       }
     );
