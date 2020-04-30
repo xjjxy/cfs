@@ -2,10 +2,10 @@ import axios from "axios"
 let http = axios.create({
   baseURL: 'http://localhost:8080/',
   // withCredentials: true,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'charset=UTF-8;multipart/form-data',
-  },
+  // headers: {
+  //   'Access-Control-Allow-Origin': '*',
+  //   'Content-Type': 'charset=UTF-8;multipart/form-data',
+  // },
   processData:false,
   cache:false,
   // transformRequest: [function (data) {

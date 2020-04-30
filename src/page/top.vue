@@ -30,7 +30,7 @@
           <MenuGroup title="管理">
             <MenuItem name="5-1" v-if="user_memu_actice">用户资料</MenuItem>
             <MenuItem name="5-2" v-if="user_memu_actice" to="/walletInfo">用户钱包</MenuItem>
-            <MenuItem name="5-1" v-if="foundation_memu_actice" to="/foundation/foundation_info">基金会资料</MenuItem>
+            <MenuItem name="5-1" v-if="foundation_memu_actice" to="foundation_user_info">用户资料</MenuItem>
             <MenuItem name="5-2" v-if="foundation_memu_actice" to="/walletInfo">基金会钱包</MenuItem>
           </MenuGroup>
         </Submenu>
@@ -116,11 +116,11 @@ export default {
     },
     tohome() {
       if (JSON.parse(sessionStorage.getItem("role")) == "0") {
-        this.$router.push("user_home");
+        this.$router.push("/user_home");
       } else if (JSON.parse(sessionStorage.getItem("role")) == "1") {
-        this.$router.push("foundation_home");
+        this.$router.push("/foundation_home");
       } else {
-        this.$router.push("admin_home");
+        this.$router.push("/admin_home");
       }
     }
   }
@@ -150,16 +150,5 @@ export default {
   left: 0px;
 }
 
-a:link {
-  color: rgba(255, 255, 255, 0.7);
-}
-a:visited {
-  color: rgba(255, 255, 255, 0.7);
-}
-a:hover {
-  color: rgba(255, 255, 255, 0.7);
-}
-a:active {
-  color: rgba(255, 255, 255, 0.7);
-}
+
 </style>

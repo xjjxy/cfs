@@ -37,8 +37,8 @@
       </Form>
     </div>
     <div v-if="isProve">
-      <h1>您以完成认证!!</h1>
-      <Button type="primary" to="/fouondation/foundationInfo">点击查看基金会信息</Button>
+      <h1>您以提交认证!!</h1>
+      <Button type="primary" to="/foundation/foundation_info">点击查看基金会信息</Button>
     </div>
   </div>
 </template>

@@ -30,6 +30,29 @@ new Vue({
 
 Vue.prototype.$axios = axios
 
+
+Vue.prototype.toString = function(date) {
+  // 补0   例如 2018/7/10 14:7:2  补完后为 2018/07/10 14:07:02
+  function addZero(num) {
+    if (num < 10) return "0" + num;
+    return num;
+  }
+  // 按自定义拼接格式返回
+  return (
+    date.getFullYear() +
+    "/" +
+    addZero(date.getMonth() + 1) +
+    "/" +
+    addZero(date.getDate()) +
+    " " +
+    addZero(date.getHours()) +
+    ":" +
+    addZero(date.getMinutes()) +
+    ":" +
+    addZero(date.getSeconds())
+  );
+};
+
 Vue.prototype.$addStorageEvent = function (type, key, data) {
   if (type === 1) {
     // 创建一个StorageEvent事件

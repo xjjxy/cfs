@@ -16,7 +16,7 @@
         <Layout>
             <!-- 头部 -->
             <top></top>
-            <Content :style="{margin: '30px 20px 0', background: '#fff', minHeight: '550px',align:'center'}">
+            <Content :style="{margin: '30px 20px 0', background: '#fff', minHeight: '550px'}">
                 <!-- <router-view>
 
                 </router-view> -->
@@ -34,3 +34,10 @@ import top from "./page/top";
         components:{top}
     }
 </script>
+
+<style>
+.info {
+  display: flex;
+  justify-content: center;
+}
+</style>
