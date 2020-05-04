@@ -4,7 +4,7 @@
       <h1>审核基金会</h1>
     </div>
     <div>
-      <List v-for="f in list" :key="f.id" :header="'编号：'+f.id" border size="large">
+      <List v-for="(f,index) in list" :key="f.id" :header="'编号：'+f.id" border size="large">
         <div class="info">
           <ListItem>
             <span>
@@ -51,7 +51,7 @@
               >{{ item.label }}</Option>
             </Select>
             {{space}}
-            <Button type="primary" @click="pass(f.id)">确认审核</Button>
+            <Button type="primary" @click="pass(f.id,index)">确认审核</Button>
           </ListItem>
         </div>
       </List>
@@ -62,17 +62,16 @@
 <script>
 export default {
   methods: {
-    pass(id) {
+    pass(id,index) {
       console.log("id:" + id);
-      for (var i in this.list) {
-        if (this.list[i].id == id) {
-          var f = this.list[i];
-          console.log(this.list[i]);
+      console.log("index:"+index);
+          var f = this.list[index];
+          console.log(this.list[index]);
           var params = new URLSearchParams();
           params.append("id", f.id);
           params.append("level", f.level);
           params.append("audit_status", f.audit_status);
-          this.$api.post("cfs/sys/handleFoundation", params, response => {
+          this.$api.post("cfs/admin/handleFoundation", params, response => {
             if (response.status >= 200 && response.status < 300) {
               var data = response.data;
               if (data.type == "1") {
@@ -83,11 +82,9 @@ export default {
               }
             }
           });
-        }
-      }
     },
     getNHFounation() {
-      this.$api.get("cfs/sys/getNHFoundation", {}, response => {
+      this.$api.get("cfs/admin/getNHFoundation", {}, response => {
         if (response.status >= 200 && response.status < 300) {
           var data = response.data;
           if (data.type == "1") {

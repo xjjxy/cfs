@@ -8,13 +8,24 @@
         <Icon type="md-cube" />基金会管理
       </template>
       <MenuGroup title="管理">
-        <MenuItem name="3-1" to="/admin/admin_foundation_handle">未审核</MenuItem>
-        <MenuItem name="3-2" to="/admin/admin_foundation_isHandle">已审核</MenuItem>
+        <MenuItem name="2-1" to="/admin/admin_foundation_handle">未审核</MenuItem>
+        <MenuItem name="2-2" to="/admin/admin_foundation_isHandle">已审核</MenuItem>
       </MenuGroup>
     </Submenu>
-    <MenuItem name="3">
+
+    <Submenu name="3">
+      <template slot="title">
+        <Icon type="md-hackernews" />募捐项目管理
+      </template>
+      <MenuGroup title="管理">
+        <MenuItem name="3-1" to="/admin/admin_project_handle">未审核</MenuItem>
+        <MenuItem name="3-2" to="/admin/admin_project_isHandle">已审核</MenuItem>
+      </MenuGroup>
+    </Submenu>
+
+    <!-- <MenuItem name="3">
       <Icon type="md-hackernews" />募捐项目管理
-    </MenuItem>
+    </MenuItem> -->
     <MenuItem name="4">
       <Icon type="md-help" />其他
     </MenuItem>

@@ -15,15 +15,15 @@
               <h3>目标金额:</h3>
             </span>
             ({{p.target_amount}}元){{space}}
-            <span v-if="p.audit_status != undefined">
+            <span v-if="p.audit_status != 0">
               <span>
                 <h3>目前金额:</h3>
               </span>
-              ({{p.now_amount}}){{space}}
+              ({{p.now_amount}})
               <span>
                 <h3>剩余金额:</h3>
               </span>
-              ({{p.last_amount}}){{space}}
+              ({{p.last_amount}})
             </span>
             <span>
               <h3>开始时间:</h3>
@@ -42,13 +42,21 @@
             <span>
               <h3>状态:</h3>
             </span>
-            {{p.audit_status == undefined?"审核中":(p.audit_status == "1"?"审核通过":(p.audit_status == "2"?"审核不t通过":"结束"))}}
+            {{p.audit_status == 0?"审核中":(p.audit_status == "1"?"审核通过":(p.audit_status == "2"?"审核不t通过":"结束"))}}
             {{space}}
-            <span></span>
-            <a :href="'http://127.0.0.1:2333/ipfs/'+p.description">
+            <a
+              :href="'http://127.0.0.1:2333/ipfs/'+p.description"
+              target="_blank"
+            >
               <h3>描述(点击查看):</h3>
             </a>
             {{space}}
+            <a
+              :href="'http://127.0.0.1:2333/ipfs/'+p.img"
+              target="_blank"
+            >
+              <h3>展示图片(点击查看):</h3>
+            </a>
           </ListItem>
         </div>
       </List>
@@ -61,7 +69,7 @@ export default {
   methods: {
     getAllProject() {
       this.$api.get(
-        "cfs/project/getAllProject",
+        "cfs/foundation/getAllMyProject",
         { foundation_id: JSON.parse(sessionStorage.getItem("foundation_id")) },
         response => {
           if (response.status >= 200 && response.status < 300) {
@@ -69,10 +77,9 @@ export default {
             if (data.type == "1") {
               this.$Message.success("Get Success");
               var list = data.list;
-
               for (var i in list) {
-                console.log(list[i]);
-                console.log(list[i].audit_status);
+                console.log("begin_time:"+list[i].begin_time)
+                list[i].begin_time = this.toString(new Date(list[i].begin_time));
               }
               this.list = list;
             }

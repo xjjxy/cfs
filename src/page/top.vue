@@ -112,7 +112,7 @@ export default {
       // this.$removeStorageEvent(1, "role");
       //修改为清空
       this.$clearStorageEvent(1);
-      // this.$router.replace("user_home");
+      this.$router.replace("user_home");
     },
     tohome() {
       if (JSON.parse(sessionStorage.getItem("role")) == "0") {

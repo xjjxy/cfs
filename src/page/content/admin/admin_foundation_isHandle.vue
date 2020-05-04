@@ -55,7 +55,7 @@ export default {
       params.append("id", id);
       params.append("level", level);
       params.append("audit_status", 0);
-      this.$api.post("cfs/sys/handleFoundation", params, response => {
+      this.$api.post("cfs/admin/handleFoundation", params, response => {
         if (response.status >= 200 && response.status < 300) {
           var data = response.data;
           if (data.type == "1") {
@@ -68,7 +68,7 @@ export default {
       });
     },
     getIsHFoundation() {
-      this.$api.get("cfs/sys/getIsHFoundation", {}, response => {
+      this.$api.get("cfs/admin/getIsHFoundation", {}, response => {
         if (response.status >= 200 && response.status < 300) {
           var data = response.data;
           if (data.type == "1") {
@@ -94,38 +94,7 @@ export default {
       list: null,
       index: 0,
       space: "- - - -",
-      statusList: [
-        {
-          value: "1",
-          label: "通过"
-        },
-        {
-          value: "2",
-          label: "不通过"
-        }
-      ],
-      levelList: [
-        {
-          value: "1",
-          label: "Lv1"
-        },
-        {
-          value: "2",
-          label: "Lv2"
-        },
-        {
-          value: "3",
-          label: "Lv3"
-        },
-        {
-          value: "4",
-          label: "Lv4"
-        },
-        {
-          value: "5",
-          label: "Lv5"
-        }
-      ]
+      
     };
   },
   created() {
