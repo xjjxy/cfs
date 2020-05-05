@@ -14,7 +14,7 @@
         </div>
         <div class="info">
           <ListItem>
-            <strong>认证图片hash(点击查看)：</strong>
+            <strong>认证图片hash：</strong>
             <a :href="'http://127.0.0.1:2333/ipfs/'+license" target="_blank">{{license}}</a>
           </ListItem>
         </div>

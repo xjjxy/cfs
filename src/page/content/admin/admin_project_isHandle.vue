@@ -1,10 +1,10 @@
 <template>
   <div>
     <div style="display:flex;justify-content: center;">
-      <h1>已审核基金会</h1>
+      <h1>已审募捐项目</h1>
     </div>
     <div>
-      <List v-for="(p) in list" :key="p.id" :header="'编号：'+p.id" border size="large">
+      <List v-for="(p) in list" :key="p.id" :header="'编号：'+p.id+'---发布自：'+p.foundation_name" border size="large">
         <div class="info">
           <ListItem>
             <span>
@@ -15,14 +15,14 @@
               :href="'http://127.0.0.1:2333/ipfs/'+p.description"
               target="_blank"
             >
-              <h3>描述(点击查看)</h3>
+              <h3>描述</h3>
             </a>
             {{space}}
             <a
               :href="'http://127.0.0.1:2333/ipfs/'+p.img"
               target="_blank"
             >
-              <h3>展示图片(点击查看)</h3>
+              <h3>展示图片</h3>
             </a>
             {{space}}
             <span>
@@ -40,13 +40,10 @@
               ({{p.last_amount}})
             </span>
             <span>
-              <h3>开始时间:</h3>
+              <h4>项目时间:</h4>
             </span>
-            ({{p.begin_time}}){{space}}
-            <span>
-              <h3>持续时间:</h3>
-            </span>
-            ({{p.duration}}天)
+            ({{p.begin_time}})到
+            ({{p.end_time}})
             {{space}}
             <span>
               <h3>等级:</h3>
@@ -94,11 +91,9 @@ export default {
             var list = data.list;
 
             for (var i in list) {
-              list[i].modify_date = this.toString(
-                new Date(list[i].modify_date)
-              );
-              console.log(list[i]);
-            }
+                list[i].begin_time = this.toString(new Date(list[i].begin_time));
+                list[i].end_time = this.toString(new Date(list[i].end_time));
+              }
             this.list = list;
           }
         } else {

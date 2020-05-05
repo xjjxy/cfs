@@ -4,7 +4,7 @@
       <h1>审核募捐项目</h1>
     </div>
     <div>
-      <List v-for="(p,index) in list" :key="p.id" :header="'编号：'+p.id" border size="large">
+      <List v-for="(p,index) in list" :key="p.id" :header="'编号：'+p.id+'-'+p.foundation_name" border size="large">
         <div class="info">
           <ListItem>
             <span>
@@ -15,14 +15,11 @@
               :href="'http://127.0.0.1:2333/ipfs/'+p.description"
               target="_blank"
             >
-              <h4>描述(点击查看)</h4>
+              <h4>描述</h4>
             </a>
             {{space}}
-            <a
-              :href="'http://127.0.0.1:2333/ipfs/'+p.img"
-              target="_blank"
-            >
-              <h4>展示图片(点击查看)</h4>
+            <a :href="'http://127.0.0.1:2333/ipfs/'+p.img" target="_blank">
+              <h4>展示图片</h4>
             </a>
             {{space}}
             <span>
@@ -30,13 +27,10 @@
             </span>
             ({{p.target_amount}}元){{space}}
             <span>
-              <h4>开始时间:</h4>
+              <h4>项目时间:</h4>
             </span>
-            ({{p.begin_time}}){{space}}
-            <span>
-              <h4>持续时间:</h4>
-            </span>
-            ({{p.duration}}天)
+            ({{p.begin_time}})到
+            ({{p.end_time}})
             {{space}}
             <span>
               <h4>等级:</h4>
@@ -98,9 +92,9 @@ export default {
           if (data.type == "1") {
             this.$Message.success("Get Success");
             var list = data.list;
-
             for (var i in list) {
-              console.log("project:" + list[i]);
+              list[i].begin_time = this.toString(new Date(list[i].begin_time));
+              list[i].end_time = this.toString(new Date(list[i].end_time));
             }
             this.list = list;
           }

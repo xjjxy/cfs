@@ -26,13 +26,10 @@
               ({{p.last_amount}})
             </span>
             <span>
-              <h3>开始时间:</h3>
+              <h4>项目时间:</h4>
             </span>
-            ({{p.begin_time}}){{space}}
-            <span>
-              <h3>持续时间:</h3>
-            </span>
-            ({{p.duration}}天)
+            ({{p.begin_time}})到
+            ({{p.end_time}})
             {{space}}
             <span>
               <h3>等级:</h3>
@@ -78,8 +75,8 @@ export default {
               this.$Message.success("Get Success");
               var list = data.list;
               for (var i in list) {
-                console.log("begin_time:"+list[i].begin_time)
                 list[i].begin_time = this.toString(new Date(list[i].begin_time));
+                list[i].end_time = this.toString(new Date(list[i].end_time));
               }
               this.list = list;
             }

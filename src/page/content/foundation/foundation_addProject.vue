@@ -35,22 +35,23 @@
               type="date"
               placeholder="Select date and time"
               style="width: 200px"
-              @on-change="dateChange"
+              @on-change="dateChange1"
             ></DatePicker>
           </FormItem>
-          <FormItem label="持续时间" prop="duration">
-            <Input
-              type="duration"
-              v-model="formValidate.duration"
-              placeholder="Enter your duration"
-              style="width: 150px"
-            />
-            <strong>天</strong>
+          <FormItem label="结束时间" prop="end_time">
+            <DatePicker
+              v-model="formValidate.end_time"
+              format="yyyy年MM月dd日" 
+              type="date"
+              placeholder="Select date and time"
+              style="width: 200px"
+              @on-change="dateChange2"
+            ></DatePicker>
           </FormItem>
           <FormItem label="项目描述" prop="description">
             <Input
               v-model="formValidate.description"
-              maxlength="200"
+              maxlength="1000"
               show-word-limit
               type="textarea"
               placeholder="Enter description..."
@@ -133,7 +134,7 @@ export default {
         name: "",
         target_amount: "",
         begin_time: "",
-        duration: "",
+        end_time: "",
         description: ""
       },
       ruleValidate: {
@@ -158,10 +159,10 @@ export default {
             trigger: "blur"
           }
         ],
-        duration: [
+        end_time: [
           {
             required: true,
-            message: "The duration cannot be empty",
+            message: "The end_time cannot be empty",
             trigger: "blur"
           }
         ],
@@ -184,10 +185,16 @@ export default {
       this.form = f;
       return false;
     },
-    dateChange(format, date) {
+    dateChange1(format, date) {
       console.log("format:" + format);
       console.log("date:" + date);
       this.formValidate.begin_time = format;
+      //   console.log(this.toString(date));
+    },
+    dateChange2(format, date) {
+      console.log("format:" + format);
+      console.log("date:" + date);
+      this.formValidate.end_time = format;
       //   console.log(this.toString(date));
     },
     handleSubmit(name) {
@@ -225,8 +232,8 @@ export default {
         JSON.parse(sessionStorage.getItem("foundation_id"))
       );
       this.form.append("target_amount", this.formValidate.target_amount);
-      this.form.append("time", this.formValidate.begin_time);
-      this.form.append("duration", this.formValidate.duration);
+      this.form.append("bTime", this.formValidate.begin_time);
+      this.form.append("eTime", this.formValidate.end_time);
       this.form.append("description", this.formValidate.description);
       this.$api.post("cfs/foundation/addProject", this.form, response => {
         if (response.status >= 200 && response.status < 300) {

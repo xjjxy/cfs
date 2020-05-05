@@ -115,12 +115,12 @@ export default {
       this.$router.replace("user_home");
     },
     tohome() {
-      if (JSON.parse(sessionStorage.getItem("role")) == "0") {
-        this.$router.push("/user_home");
-      } else if (JSON.parse(sessionStorage.getItem("role")) == "1") {
+      if (JSON.parse(sessionStorage.getItem("role")) == "1") {
         this.$router.push("/foundation_home");
-      } else {
+      } else if (JSON.parse(sessionStorage.getItem("role")) == "2") {
         this.$router.push("/admin_home");
+      } else {
+        this.$router.push("/user_home");
       }
     }
   }
