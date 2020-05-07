@@ -5,6 +5,7 @@ import foundation_register from "./page/ui/foundation_register"
 import walletInfo from "./page/content/walletInfo"
 import createWallet from "./page/content/createWallet"
 import user_home from "./page/content/user/user_home"
+import user_projectDetail from "./page/content/user/user_projectDetail"
 import user_donate from "./page/content/user/user_donate"
 import user_news from "./page/content/user/user_news"
 import user_publicInfo from "./page/content/user/user_publicInfo"
@@ -32,6 +33,7 @@ export default [
   { path: '/createWallet', name: 'createWallet', component: createWallet },
   { path: '/', name: 'user_home', component: user_home },
   { path: '/user_home', name: 'user_home', component: user_home },
+  { path: '/user_projectDetail/:project_id', name: 'user_projectDetail', component: user_projectDetail },
   { path: '/user_donate', name: 'user_donate', component: user_donate },
   { path: '/user_news', name: 'user_news', component: user_news },
   { path: '/user_publicInfo', name: 'user_publicInfo', component: user_publicInfo },

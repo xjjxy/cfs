@@ -25,13 +25,13 @@
               placeholder="Enter your target_amount"
               style="width: 200px"
             />
-            <strong>元</strong>
+            <strong>Ether</strong>
           </FormItem>
 
           <FormItem label="开始时间" prop="begin_time">
             <DatePicker
               v-model="formValidate.begin_time"
-              format="yyyy年MM月dd日" 
+              format="yyyy年MM月dd日"
               type="date"
               placeholder="Select date and time"
               style="width: 200px"
@@ -41,7 +41,7 @@
           <FormItem label="结束时间" prop="end_time">
             <DatePicker
               v-model="formValidate.end_time"
-              format="yyyy年MM月dd日" 
+              format="yyyy年MM月dd日"
               type="date"
               placeholder="Select date and time"
               style="width: 200px"
@@ -99,6 +99,11 @@
 <script>
 export default {
   created() {
+    //监听sessionStorage事件
+    window.addEventListener("setItem", e => {
+      console.log(e);
+      this.available = JSON.parse(sessionStorage.getItem("foundation.audit_status"));
+    });
     this.$api.get(
       "cfs/foundation/getFoundation",
       {
@@ -125,7 +130,7 @@ export default {
   },
   data() {
     return {
-      available: JSON.parse(sessionStorage.getItem("foundation.audit_status")),
+      available: "",
       add: true,
       isAdd: false,
       file: null,
@@ -250,6 +255,7 @@ export default {
         }
       });
     }
-  }
+  },
+
 };
 </script>

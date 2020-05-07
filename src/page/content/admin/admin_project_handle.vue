@@ -25,7 +25,7 @@
             <span>
               <h4>目标金额:</h4>
             </span>
-            ({{p.target_amount}}元){{space}}
+            ({{p.target_amount}}Ether){{space}}
             <span>
               <h4>项目时间:</h4>
             </span>

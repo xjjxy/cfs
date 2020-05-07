@@ -14,7 +14,7 @@
             <span>
               <h3>目标金额:</h3>
             </span>
-            ({{p.target_amount}}元){{space}}
+            ({{p.target_amount}}Ether){{space}}
             <span v-if="p.audit_status != 0">
               <span>
                 <h3>目前金额:</h3>

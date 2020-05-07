@@ -40,9 +40,9 @@ Vue.prototype.toString = function(date) {
   // 按自定义拼接格式返回
   return (
     date.getFullYear() +
-    "/" +
+    "-" +
     addZero(date.getMonth() + 1) +
-    "/" +
+    "-" +
     addZero(date.getDate()) +
     " " +
     addZero(date.getHours()) +
@@ -52,6 +52,8 @@ Vue.prototype.toString = function(date) {
     addZero(date.getSeconds())
   );
 };
+
+
 
 Vue.prototype.$addStorageEvent = function (type, key, data) {
   if (type === 1) {
