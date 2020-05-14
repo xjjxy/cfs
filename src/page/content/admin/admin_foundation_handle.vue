@@ -71,6 +71,7 @@ export default {
           params.append("id", f.id);
           params.append("level", f.level);
           params.append("audit_status", f.audit_status);
+          params.append("username",JSON.parse(sessionStorage.getItem("username")));
           this.$api.post("cfs/admin/handleFoundation", params, response => {
             if (response.status >= 200 && response.status < 300) {
               var data = response.data;

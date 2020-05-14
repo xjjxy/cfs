@@ -1,6 +1,6 @@
 <template>
   <div style="background:#eee;padding: 20px">
-    <h1>ccs募捐服务平台公众问题及解答</h1>
+    <h1>cfs募捐服务平台公众问题及解答</h1>
     <Card :bordered="false">
       <p slot="title">一、如何发起项目？</p>
       <p>

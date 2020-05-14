@@ -12,24 +12,26 @@
             </span>
             ({{p.name}}){{space}}
             <span>
-              <h3>目标金额:</h3>
-            </span>
-            ({{p.target_amount}}Ether){{space}}
-            <span v-if="p.audit_status != 0">
               <span>
-                <h3>目前金额:</h3>
+                <h3>目标金额:</h3>
               </span>
-              ({{p.now_amount}})
-              <span>
-                <h3>剩余金额:</h3>
+              ({{p.target_amount}}Ether)
+              <span v-if="p.audit_status != 0">
+                <span>
+                  <h3>目前金额:</h3>
+                </span>
+                ({{p.now_amount}}Ether)
+                <span>
+                  <h3>剩余金额:</h3>
+                </span>
+                ({{p.last_amount}}Ether)
               </span>
-              ({{p.last_amount}})
             </span>
             <span>
               <h4>项目时间:</h4>
             </span>
-            ({{p.begin_time}})到
-            ({{p.end_time}})
+            ({{p.begin_time}}到
+            {{p.end_time}})
             {{space}}
             <span>
               <h3>等级:</h3>
@@ -45,15 +47,20 @@
               :href="'http://127.0.0.1:2333/ipfs/'+p.description"
               target="_blank"
             >
-              <h3>描述(点击查看):</h3>
+              <h3>描述(点击查看)</h3>
             </a>
             {{space}}
-            <a
-              :href="'http://127.0.0.1:2333/ipfs/'+p.img"
-              target="_blank"
-            >
-              <h3>展示图片(点击查看):</h3>
+            <a :href="'http://127.0.0.1:2333/ipfs/'+p.img" target="_blank">
+              <h3>展示图片(点击查看)</h3>
             </a>
+            <template slot="action">
+              <li>
+                <p @click="addPhase(p.id)">添加阶段信息</p>
+              </li>
+              <li>
+                <p @click="adminComment(p.id)">管理评论</p>
+              </li>
+            </template>
           </ListItem>
         </div>
       </List>
@@ -64,6 +71,14 @@
 <script>
 export default {
   methods: {
+    addPhase(id) {
+      console.log("project_id:" + id);
+      let routeUrl = this.$router.resolve({
+        name: "foundation_addPhase",
+        params: { project_id: id }
+      });
+      window.open(routeUrl.href, "_blank");
+    },
     getAllProject() {
       this.$api.get(
         "cfs/foundation/getAllMyProject",
@@ -75,7 +90,9 @@ export default {
               this.$Message.success("Get Success");
               var list = data.list;
               for (var i in list) {
-                list[i].begin_time = this.toString(new Date(list[i].begin_time));
+                list[i].begin_time = this.toString(
+                  new Date(list[i].begin_time)
+                );
                 list[i].end_time = this.toString(new Date(list[i].end_time));
               }
               this.list = list;
@@ -90,7 +107,7 @@ export default {
   data() {
     return {
       list: null,
-      space: "- - - -"
+      space: "- -"
     };
   },
   created() {

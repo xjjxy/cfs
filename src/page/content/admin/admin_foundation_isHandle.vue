@@ -55,6 +55,7 @@ export default {
       params.append("id", id);
       params.append("level", level);
       params.append("audit_status", 0);
+      params.append("username",JSON.parse(sessionStorage.getItem("username")));
       this.$api.post("cfs/admin/handleFoundation", params, response => {
         if (response.status >= 200 && response.status < 300) {
           var data = response.data;
@@ -72,7 +73,7 @@ export default {
         if (response.status >= 200 && response.status < 300) {
           var data = response.data;
           if (data.type == "1") {
-            this.$Message.success("Get Success");
+            // this.$Message.success("Get Success");
             var list = data.list;
 
             for (var i in list) {
@@ -84,7 +85,7 @@ export default {
             this.list = list;
           }
         } else {
-          this.$Message.error("Get Fail!!");
+          // this.$Message.error("Get Fail!!");
         }
       });
     }

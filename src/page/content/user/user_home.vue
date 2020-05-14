@@ -2,9 +2,11 @@
   <div class="info">
     <div></div>
     <div>
+      <Input v-model="project_name" placeholder="输入项目名" style="width: 500px" />
+      <Button type="error" @click="search">Search</Button>
       <List item-layout="vertical">
         <!-- <a href="/user_donate" target="_blank"> -->
-        <ListItem v-for="item in list" :key="item.title" style="color:black">
+        <ListItem v-for="item in list" :key="item.title" >
           <div @click="detail(item.id)">
             <ListItemMeta
               :title="'编号:'+item.id+'      '+item.name"
@@ -57,12 +59,17 @@ export default {
     this.getAllProjectBasicInfo();
   },
   methods: {
+    search() {
+      console.log("project_name:"+this.project_name);
+      this.getAllProjectBasicInfo();
+    },
     getAllProjectBasicInfo() {
       this.$api.get(
         "cfs/donor/getAllProjectBasicInfo",
         {
           currentPage: this.currentPage,
-          pageSize: this.pageSize
+          pageSize: this.pageSize,
+          project_name: this.project_name
         },
         response => {
           if (response.status >= 200 && response.status < 300) {
@@ -103,6 +110,7 @@ export default {
       currentPage: 1,
       totalCount: 20,
       pageSize: 5,
+      project_name: "",
       list: null
     };
   }

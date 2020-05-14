@@ -11,7 +11,7 @@
       <div class="info">项目启动后，发起人会在慈善募捐平台发布项目进展，多来平台上看看哦！</div>
     </div>
     <div class="info">
-      <Card dis-hover bordered="false" style="width:500px">
+      <Card dis-hover :bordered="false" style="width:500px">
         <div style="text-align:center">
           <img :src="'http://127.0.0.1:2333/ipfs/'+project.img" style="width: 280px;height:150px" />
           <!-- <p>发布机构:{{project.foundation_name}}</p> -->
@@ -20,7 +20,7 @@
           <p>项目时间:{{project.begin_time}}至{{project.end_time}}</p>
         </div>
       </Card>
-      <Card dis-hover bordered="false">
+      <Card dis-hover :bordered="false">
         <p>收款方:{{project.foundation_name}}</p>
         <br />
         <div class="info">

@@ -1,36 +1,41 @@
 <template>
-  <div style="display:flex;justify-content: center;">
-    <Form ref="formInline" :model="formInline" :rules="ruleInline" :label-width="80">
-      <FormItem label="用户名" prop="username">
-        <Input
-          type="text"
-          v-model="formInline.username"
-          placeholder="Username"
-          style="width: 300px"
-        />
-      </FormItem>
-      <FormItem label="密码" prop="password">
-        <Input
-          type="password"
-          password
-          v-model="formInline.password"
-          placeholder="Password"
-          style="width: 300px"
-        />
-      </FormItem>
+  <div>
+    <div class="info">
+      <h1>系统登录</h1>
+    </div>
+    <div class="info">
+      <Form ref="formInline" :model="formInline" :rules="ruleInline" :label-width="80">
+        <FormItem label="用户名" prop="username">
+          <Input
+            type="text"
+            v-model="formInline.username"
+            placeholder="Username"
+            style="width: 300px"
+          />
+        </FormItem>
+        <FormItem label="密码" prop="password">
+          <Input
+            type="password"
+            password
+            v-model="formInline.password"
+            placeholder="Password"
+            style="width: 300px"
+          />
+        </FormItem>
 
-      <FormItem label="用户角色" prop="role">
-        <RadioGroup v-model="formInline.role">
-          <Radio label="0">捐助人</Radio>
-          <Radio label="1">基金会</Radio>
-          <Radio label="2">管理员</Radio>
-        </RadioGroup>
-      </FormItem>
-      <FormItem>
-        <Button type="primary" @click="handleSubmit('formInline')">Login</Button>
-        <Button @click="handleReset('formInline')" style="margin-left: 8px">Reset</Button>
-      </FormItem>
-    </Form>
+        <FormItem label="用户角色" prop="role">
+          <RadioGroup v-model="formInline.role">
+            <Radio label="0">捐助人</Radio>
+            <Radio label="1">基金会</Radio>
+            <Radio label="2">管理员</Radio>
+          </RadioGroup>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="handleSubmit('formInline')">Login</Button>
+          <Button @click="handleReset('formInline')" style="margin-left: 8px">Reset</Button>
+        </FormItem>
+      </Form>
+    </div>
   </div>
 </template>
 <script>
@@ -109,8 +114,16 @@ export default {
               this.$addStorageEvent(1, "uuid", JSON.stringify(user.uuid));
               this.$addStorageEvent(1, "id", JSON.stringify(user.id));
               this.$addStorageEvent(1, "name", JSON.stringify(user.name));
-              this.$addStorageEvent(1, "username", JSON.stringify(user.username));
-              this.$addStorageEvent(1, "foundation_id", JSON.stringify(user.foundation_id));
+              this.$addStorageEvent(
+                1,
+                "username",
+                JSON.stringify(user.username)
+              );
+              this.$addStorageEvent(
+                1,
+                "foundation_id",
+                JSON.stringify(user.foundation_id)
+              );
               this.$addStorageEvent(1, "tel", JSON.stringify(user.tel));
               console.log(sessionStorage.getItem("uuid"));
               if (user.role == "0") {

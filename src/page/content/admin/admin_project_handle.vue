@@ -73,6 +73,7 @@ export default {
       params.append("id", p.id);
       params.append("level", p.level);
       params.append("audit_status", p.audit_status);
+      params.append("username",JSON.parse(sessionStorage.getItem("username")));
       this.$api.post("cfs/admin/handleProject", params, response => {
         if (response.status >= 200 && response.status < 300) {
           var data = response.data;
@@ -90,7 +91,7 @@ export default {
         if (response.status >= 200 && response.status < 300) {
           var data = response.data;
           if (data.type == "1") {
-            this.$Message.success("Get Success");
+            // this.$Message.success("Get Success");
             var list = data.list;
             for (var i in list) {
               list[i].begin_time = this.toString(new Date(list[i].begin_time));
@@ -99,7 +100,7 @@ export default {
             this.list = list;
           }
         } else {
-          this.$Message.error("Get Fail!!");
+          // this.$Message.error("Get Fail!!");
         }
       });
     }

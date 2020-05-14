@@ -1,6 +1,8 @@
 <template>
   <div style="background:#eee;padding: 20px">
-    <h1>钱包信息</h1>
+    <div class="info">
+      <h1>钱包信息</h1>
+    </div>
     <div v-if="noWallet">
       <Card :bordered="false">
         <p slot="title">还没有钱包</p>
@@ -10,7 +12,7 @@
       </Card>
     </div>
 
-    <div v-if="hasWallet">
+    <div v-if="hasWallet" >
       <Card :bordered="false">
         <p slot="title">账户地址</p>
         <p>{{wallet_address}}</p>
