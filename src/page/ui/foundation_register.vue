@@ -45,7 +45,7 @@
       </FormItem>
 
       <FormItem>
-        <Button type="primary" @click="handleSubmit('formValidate')">Register</Button>
+        <Button type="primary" @click="checkUsername">Register</Button>
         <Button @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
       </FormItem>
     </Form>
@@ -98,14 +98,34 @@ export default {
     };
   },
   methods: {
-    
+    checkUsername() {
+      console.log("foucs");
+      this.$api.get(
+        "cfs/foundation/checkUsername",
+        {
+          username: this.formValidate.username
+        },
+        response => {
+          if (response.status >= 200 && response.status < 300) {
+            console.log(response.data); //请求成功，response为成功信息参数
+            var data = response.data;
+            if (data.check == 1) {
+              this.$Message.error("用户名不可用！！");
+            } else {
+              this.$Message.success("用户名可用！！");
+              this.handleSubmit("formValidate");
+            }
+          }
+        }
+      );
+    },
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
           console.log(this.formValidate.role);
           this.register();
         } else {
-          this.$Message.error("Register Fail!");
+          this.$Message.error("请输入完整信息");
         }
       });
     },
