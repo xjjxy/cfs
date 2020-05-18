@@ -30,10 +30,10 @@
           <MenuGroup title="管理">
             <MenuItem name="5-1" v-if="user_memu_actice" to="/user_personal_center">用户资料</MenuItem>
             <MenuItem name="5-2" v-if="user_memu_actice" to="/walletInfo">用户钱包</MenuItem>
-            <MenuItem name="5-1" v-if="foundation_memu_actice" to="foundation_user_info">用户资料</MenuItem>
+            <MenuItem name="5-1" v-if="foundation_memu_actice" to="/foundation/foundaton_user_personal_center">用户资料</MenuItem>
             <MenuItem name="5-2" v-if="foundation_memu_actice" to="/walletInfo">基金会钱包</MenuItem>
-            <MenuItem name="5-1" v-if="admin_memu_actice" to="">操作日志</MenuItem>
-            <MenuItem name="5-2" v-if="admin_memu_actice" to="">登录日志</MenuItem>
+            <MenuItem name="5-1" v-if="admin_memu_actice" to="/admin/admin_audit_log">操作日志</MenuItem>
+            <MenuItem name="5-2" v-if="admin_memu_actice" to="/admin/admin_login_log">登录日志</MenuItem>
           </MenuGroup>
         </Submenu>
         <MenuItem name="6" @click.native="logout">

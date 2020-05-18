@@ -1,6 +1,6 @@
 <template>
   <div class="layout-nav-left">
-    <MenuItem name="1">
+    <MenuItem name="1"  to="/foundation_home">
       <Icon type="ios-paper" />首页
     </MenuItem>
     <!-- <MenuItem name="2">

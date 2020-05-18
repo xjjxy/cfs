@@ -22,7 +22,7 @@
         <MenuItem name="3-2" to="/admin/admin_project_isHandle">已审核</MenuItem>
       </MenuGroup>
     </Submenu>
-    <MenuItem name="4">
+    <MenuItem name="4" to="/admin/admin_other">
       <Icon type="md-help" />其他
     </MenuItem>
   </div>

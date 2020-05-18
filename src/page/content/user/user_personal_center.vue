@@ -1,5 +1,5 @@
 <template>
-  <div style>
+  <div>
     <div class="info">
       <h1>个人信息</h1>
     </div>
@@ -77,7 +77,7 @@ export default {
       donatedProjectList: null,
       commentList: null,
       donatedProjectFlag: true,
-      commentFlag: true,
+      commentFlag: false,
       donatesProjectButton: "primary",
       commentButton: "text"
     };

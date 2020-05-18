@@ -22,6 +22,15 @@
           <Button type="error" to="/user_donate">我要捐赠</Button>
         </div>
       </Card>
+      <span>
+        <!-- <Steps v-for="item in phaseList" :key="item.id" :current="100" direction="vertical">
+            <Step :title="item.phase_title+'发布于:'+item.phase_time" content="这里是该步骤的描述信息"></Step>
+        </Steps>-->
+        <h3>参与此项目的爱心人士</h3>
+        <List v-for="item in donateList" :key="item.id"  :split="false">
+          <ListItem>{{item.donor_name}}捐赠了{{item.donate_amount}}Ether在{{item.donate_time}}</ListItem>
+        </List>
+      </span>
     </div>
     <div>
       <div class="info">
@@ -47,16 +56,23 @@
             </p>
           </div>
           <List item-layout="vertical">
-            <ListItem v-for="item in data" :key="item.title">
-              <ListItemMeta :title="item.title" :description="item.description" />
-              {{ item.content }}
+            <ListItem v-for="item in phaseList" :key="item.id">
+              <ListItemMeta
+                :title="item.phase_title"
+                :description="'花费:'+item.phase_spend+'Ether'"
+              />
+              {{ item.phase_description }}
               <template slot="extra">
-                <p>888</p>
+                <p>"发布时间:"{{item.phase_time}}</p>
               </template>
             </ListItem>
           </List>
+          <!-- <Steps v-for="item in phaseList" :key="item.id" :current="100" direction="vertical">
+            <Step :title="item.phase_title+'发布于:'+item.phase_time" content="这里是该步骤的描述信息"></Step>
+          </Steps>-->
         </Card>
       </div>
+
       <div class="info" v-show="showCommentFlag">
         <Card dis-hover :bordered="false" style="width:680px">
           <div style="text-align:center">
@@ -75,7 +91,10 @@
           <Button type="success" @click="addComment">评论</Button>
           <List>
             <ListItem v-for="item in commentList" :key="item.id">
-              <ListItemMeta :title="item.commentator_name+'评论于:'+item.comment_time" :description="item.comment" />
+              <ListItemMeta
+                :title="item.commentator_name+'评论于:'+item.comment_time"
+                :description="item.comment"
+              />
             </ListItem>
           </List>
         </Card>
@@ -97,43 +116,60 @@ export default {
       showCommentFlag: false,
       comment: null,
       commentList: null,
-      data: [
-        {
-          title: "This is title 1",
-          description:
-            "This is description, this is description, this is description.",
-          avatar:
-            "https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar",
-          content:
-            "This is the content, this is the content, this is the content, this is the content."
-        },
-        {
-          title: "This is title 2",
-          description:
-            "This is description, this is description, this is description.",
-          avatar:
-            "https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar",
-          content:
-            "This is the content, this is the content, this is the content, this is the content."
-        },
-        {
-          title: "This is title 3",
-          description:
-            "This is description, this is description, this is description.",
-          avatar:
-            "https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar",
-          content:
-            "This is the content, this is the content, this is the content, this is the content."
-        }
-      ]
+      phaseList: null,
+      donateList: null
     };
   },
   methods: {
-    getCommentByProjectId() {
-      console.log("get comment");
-      console.log("project id:"+this.id);
+    getProjectDonate() {
       this.$api.get(
-        'cfs/donor/getCommentByProjectId',
+        "cfs/donor/getProjectDonate",
+        { project_id: this.id },
+        response => {
+          if (response.status >= 200 && response.status < 300) {
+            var data = response.data;
+            if (data.type == "1") {
+              var list = data.list;
+              for (var index in list) {
+                list[index].donate_time = this.toString(
+                  new Date(list[index].donate_time)
+                );
+              }
+              this.donateList = list;
+            } else {
+              this.$Message.error("获取项目阶段失败！！");
+            }
+          }
+        }
+      );
+    },
+    getProjectPhase() {
+      this.$api.get(
+        "cfs/foundation/getPhase",
+        { project_id: this.id },
+        response => {
+          if (response.status >= 200 && response.status < 300) {
+            var data = response.data;
+            if (data.type == "1") {
+              var list = data.list;
+              for (var index in list) {
+                list[index].phase_time = this.toString(
+                  new Date(list[index].phase_time)
+                );
+              }
+              this.phaseList = list;
+            } else {
+              this.$Message.error("获取项目阶段失败！！");
+            }
+          }
+        }
+      );
+    },
+    getCommentByProjectId() {
+      // console.log("get comment");
+      // console.log("project id:"+this.id);
+      this.$api.get(
+        "cfs/donor/getCommentByProjectId",
         { project_id: this.id },
         response => {
           if (response.status >= 200 && response.status < 300) {
@@ -143,7 +179,9 @@ export default {
               var list = data.list;
               for (var index in list) {
                 // console.log("comment:" + list[index].comment);
-                list[index].comment_time = this.toString(new Date(list[index].comment_time));
+                list[index].comment_time = this.toString(
+                  new Date(list[index].comment_time)
+                );
               }
               this.commentList = list;
             } else {
@@ -154,6 +192,10 @@ export default {
       );
     },
     addComment() {
+      if(JSON.parse(sessionStorage.getItem("id")) == undefined){
+        this.$Message.error("请先登录！");
+        return;
+      }
       this.$api.get(
         "cfs/donor/addComment",
         {
@@ -225,6 +267,8 @@ export default {
     this.id = this.$route.params.project_id;
     this.getProjectDetail();
     this.getCommentByProjectId();
+    this.getProjectPhase();
+    this.getProjectDonate();
   }
 };
 </script>

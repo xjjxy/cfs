@@ -37,7 +37,8 @@
 
           <template slot="extra">
             <div @click="detail(item.id)">
-              <img :src="'http://127.0.0.1:2333/ipfs/'+item.img" style="width: 280px;height:150px" />
+              <!-- <img :src="'http://127.0.0.1:2333/ipfs/'+item.img" style="width: 280px;height:150px" /> -->
+              <img :src="'http://'+host+':2333/ipfs/'+item.img" style="width: 280px;height:150px" />
             </div>
           </template>
         </ListItem>
@@ -111,7 +112,8 @@ export default {
       totalCount: 20,
       pageSize: 5,
       project_name: "",
-      list: null
+      list: null,
+      host:window.location.hostname,
     };
   }
 };

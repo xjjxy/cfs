@@ -17,12 +17,16 @@ import foundation_addPhase from "./page/content/foundation/foundation_addPhase"
 import foundation_qa from "./page/content/foundation/foundation_q&a"
 import foundation_prove from "./page/content/foundation/foundation_prove"
 import foundation_info from "./page/content/foundation/foundation_info"
+import adminComment from "./page/content/foundation/adminComment"
+import foundaton_user_personal_center from "./page/content/foundation/foundaton_user_personal_center"
 import admin_home from "./page/content/admin/admin_home"
 import admin_foundation_handle from "./page/content/admin/admin_foundation_handle"
 import admin_foundation_isHandle from "./page/content/admin/admin_foundation_isHandle"
 import admin_project_handle from "./page/content/admin/admin_project_handle"
 import admin_project_isHandle from "./page/content/admin/admin_project_isHandle"
 import admin_other from "./page/content/admin/admin_other"
+import admin_login_log from "./page/content/admin/admin_login_log"
+import admin_audit_log from "./page/content/admin/admin_audit_log"
 
 
 
@@ -46,10 +50,14 @@ export default [
   { path: '/foundation/foundation_qa', name: 'foundation_qa', component: foundation_qa },
   { path: '/foundation/foundation_prove', name: 'foundation_prove', component: foundation_prove },
   { path: '/foundation/foundation_info', name: 'foundation_info', component: foundation_info },
+  { path: '/foundation/foundaton_user_personal_center', name: 'foundaton_user_personal_center', component: foundaton_user_personal_center },
+  { path: '/foundation/adminComment/:project_id', name: 'adminComment', component: adminComment },
   { path: '/admin_home', name: 'admin_home', component: admin_home },
   { path: '/admin/admin_foundation_handle', name: 'admin_foundation_handle', component: admin_foundation_handle },
   { path: '/admin/admin_foundation_isHandle', name: 'admin_foundation_isHandle', component: admin_foundation_isHandle},
   { path: '/admin/admin_project_handle', name: 'admin_project_handle', component: admin_project_handle },
   { path: '/admin/admin_project_isHandle', name: 'admin_project_isHandle', component: admin_project_isHandle },
   { path: '/admin/admin_other', name: 'admin_other', component: admin_other },
+  { path: '/admin/admin_audit_log', name: 'admin_audit_log', component: admin_audit_log },
+  { path: '/admin/admin_login_log', name: 'admin_login_log', component: admin_login_log },
 ]

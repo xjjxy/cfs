@@ -1,6 +1,7 @@
 import axios from "axios"
 let http = axios.create({
-  baseURL: 'http://localhost:8080/',
+  // baseURL: 'http://localhost:8080/',
+  baseURL: 'http://'+window.location.hostname+':8080/',
   // withCredentials: true,
   // headers: {
   //   'Access-Control-Allow-Origin': '*',

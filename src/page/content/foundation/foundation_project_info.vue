@@ -55,7 +55,7 @@
             </a>
             <template slot="action">
               <li>
-                <p @click="addPhase(p.id)">添加阶段信息</p>
+                <p @click="addPhase(p.id,p.last_amount,p.name)">添加阶段信息</p>
               </li>
               <li>
                 <p @click="adminComment(p.id)">管理评论</p>
@@ -71,10 +71,30 @@
 <script>
 export default {
   methods: {
-    addPhase(id) {
+    addPhase(id, last_amount, name) {
       console.log("project_id:" + id);
+      this.$addStorageEvent(
+        1,
+        "projectLast_amount" + id,
+        JSON.stringify(last_amount)
+      );
+      this.$addStorageEvent(1, "projectName" + id, JSON.stringify(name));
       let routeUrl = this.$router.resolve({
         name: "foundation_addPhase",
+        params: { project_id: id }
+      });
+      window.open(routeUrl.href, "_blank");
+      //query方式类似get请求 参数拼接在url后
+      // let routeUrl = this.$router.resolve({
+      //   path: "/foundation/foundation_addPhase",
+      //   query: { project_id: id }
+      // });
+      // window.open(routeUrl.href, "_blank");
+    },
+
+    adminComment(id) {
+      let routeUrl = this.$router.resolve({
+        name: "adminComment",
         params: { project_id: id }
       });
       window.open(routeUrl.href, "_blank");

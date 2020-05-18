@@ -6,7 +6,7 @@
     <MenuItem name="2" to="http://www.xinhuanet.com/gongyi/gydt.htm" target="_blank">
       <Icon type="logo-hackernews" />项目新闻
     </MenuItem>
-    <MenuItem name="3" @click.native="info">
+    <MenuItem name="3" to="/user_publicInfo">
       <Icon type="ios-information-circle" />信息公开
     </MenuItem>
     <MenuItem name="4" to="/user_qa">

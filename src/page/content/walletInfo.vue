@@ -32,7 +32,7 @@
 
       <Card :bordered="false">
         <p slot="title">账户hash</p>
-        <p>{{wallet_address}}</p>
+        <p>{{hash}}</p>
       </Card>
     </div>
   </div>
